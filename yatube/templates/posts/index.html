@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Последние обновления на сайте
+{% endblock %} 
+
+
+{% block content %}    
+  {% for post in page_obj %}
+    <article>  
+      <ul>
+        <li>
+          Автор: 
+          <a href="{% url 'posts:profile' post.author %}" 
+            style="color:#0d6efd; text-decoration:none">
+              {{ post.author.get_full_name }}
+          </a>
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>
+        {{ post.text|linebreaksbr }}
+      </p>    
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'posts:post_detail' post.id %}">
+            подробная информация
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          {% if post.group.slug %}
+            <a class="nav-link" href = "{% url 'posts:group_list' post.group.slug %}">
+              записи группы {{ post.group.title }}
+            </a>      
+          {% endif %}
+        </li>
+      </ul>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    </article>
+  {% endfor %} 
+  {% include 'includes/paginator.html' %}
+{% endblock %} 
