@@ -10,7 +10,6 @@ from .utils import paginator
 User = get_user_model()
 
 
-
 def index(request):
     posts = Post.objects.select_related('author', 'group')
     page_obj = paginator(posts, request)
@@ -92,6 +91,3 @@ def post_edit(request, post_id):
         'is_edit': True,
     }
     return render(request, 'posts/create_post.html', context)
-
-
-
