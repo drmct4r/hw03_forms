@@ -3,37 +3,36 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import PostForm
 from .models import Post, Group, User
-from .utils import paginator_func
+from .utils import make_paginate
 
 
 def index(request):
-    page_obj = paginator_func(
+    return render(request, 'posts/index.html', {'page_obj': make_paginate(
         Post.objects.select_related('author', 'group'),
         request,
-    )
-    return render(request, 'posts/index.html', {'page_obj': page_obj})
+    )})
 
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     return render(request, 'posts/group_list.html', {
         'group': group,
-        'page_obj': paginator_func(group.posts.all(), request),
+        'page_obj': make_paginate(group.posts.all(), request),
     })
 
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
-    posts = author.posts.all()
     return render(request, 'posts/profile.html', {
         'author': author,
-        'page_obj': paginator_func(posts, request),
+        'page_obj': make_paginate(author.posts.all(), request),
     })
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    return render(request, 'posts/post_detail.html', {'post': post})
+    return render(request, 'posts/post_detail.html', {
+        'post': get_object_or_404(Post, id=post_id)
+    })
 
 
 @login_required

@@ -26,29 +26,28 @@
           </a>
         </li>
         {% if request.user.is_authenticated %}
-          <li class="nav-item"> 
-            <a class="nav-link
-              {% if view_name  == 'posts:post_create' %}active{% endif %}"
-              href="{% url 'posts:post_create' %}"
-            >
-                Новая запись
-            </a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link link-light
-              {% if view_name  == 'users:password_reset' %}active{% endif %}"
-              href="{% url 'users:password_reset' %}"
-            >
-                Сбросить пароль
-            </a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if view_name  == 'posts:profile' %}active{% endif %}" 
-            href="{% url 'posts:profile' user.username %}">Пользователь: {{ user.username }}</a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link
+                {% if view_name  == 'posts:post_create' %}active{% endif %}"
+                href="{% url 'posts:post_create' %}"
+              >
+                  Новая запись
+              </a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link link-light
+                {% if view_name  == 'users:password_reset' %}active{% endif %}"
+                href="{% url 'users:password_reset' %}"
+              >
+                  Сбросить пароль
+              </a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+            </li>
+            <li class="nav-item">
+              Пользователь: {{ user.username }}
+            </li>
         {% else %}
           <li class="nav-item"> 
             <a class="nav-link link-light
