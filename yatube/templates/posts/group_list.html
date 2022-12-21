@@ -20,11 +20,7 @@
     <article>
       <ul>
         <li>
-          Автор: 
-          <a href="{% url 'posts:profile' post.author %}" 
-            style="color:#0d6efd; text-decoration:none">
-              {{ post.author.get_full_name }}
-          </a>
+          Автор: {{ post.author.get_full_name }}
         </li>
         <li>
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
