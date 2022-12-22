@@ -8,10 +8,10 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['text', 'group']
         help_texts = {
-            'text': 'Текст нового поста',
-            'group': 'Группа, к которой будет относиться пост'
+            'text': 'Текст новой записи',
+            'group': 'Группа, к которой будет относиться запись'
         }
         labels = {
-            'text': 'Текст поста',
+            'text': 'Текст записи',
             'group': 'Группа'
         }

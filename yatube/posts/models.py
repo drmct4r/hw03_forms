@@ -3,6 +3,7 @@ from django.db import models
 
 
 User = get_user_model()
+string = '<<< Автор: {}, Дата: {:%Y/%m/%d}, Группа: {}, Текст: {:30} >>>'
 
 
 class Group(models.Model):
@@ -45,12 +46,13 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-pub_date',)
-        verbose_name = 'Пост'
-        verbose_name_plural = 'Посты'
+        verbose_name = 'Запись'
+        verbose_name_plural = 'Записи'
 
     def __str__(self):
-        return '<<< Автор: {}, Группа: {}, Текст: {} >>>'.format(
-            self.author,
+        return string.format(
+            self.author.username,
+            self.pub_date,
             self.group,
-            self.text[:30]
+            self.text
         )
