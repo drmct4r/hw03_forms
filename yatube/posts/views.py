@@ -7,10 +7,10 @@ from .utils import make_paginate
 
 
 def index(request):
-    return render(request, 'posts/index.html', {'page_obj': make_paginate(
-        Post.objects.select_related('author', 'group'),
-        request,
-    )})
+    return render(request, 'posts/index.html', {
+        'page_obj': make_paginate(Post.objects.select_related(
+            'author', 'group'), request)
+    })
 
 
 def group_posts(request, slug):
